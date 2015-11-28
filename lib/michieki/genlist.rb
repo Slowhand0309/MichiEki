@@ -6,7 +6,8 @@ require 'json'
 
 module MichiEki
 
-
+  # generate road station list class
+  # from http://www.seaview.jp/rs/index.html
   class StationListGenerator
 
      ATTR_LIST = ["name", "lat", "lng", "park", "", "", "", "address"]
