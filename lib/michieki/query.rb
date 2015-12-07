@@ -28,17 +28,21 @@ module MichiEki
 
       # where name
       if params[:name] != nil
-        query_name = nil
         if query_data != nil
-           query_data.each do |k, v|
-             if v.kind_of?(Hash)
-               if v['name'].include?(params[:name])
-                 query_name = v
-                 break
-               end
-             end
-           end
-           query_data = query_name if query_name != nil
+          # query area & name
+          query_name = search_name(query_data, params)
+          if query_name != nil
+            query_data = query_name
+          end
+        else
+          # query name
+          @data.each do |area_data|
+            query_name = search_name(area_data, params)
+            if query_name != nil
+              query_data = query_name
+              break
+            end
+          end
         end
       end
 
@@ -48,5 +52,21 @@ module MichiEki
         @data
       end
     end
+
+    # search equal name
+    def search_name(query_data, params)
+
+      query_name = nil
+      query_data.each do |k, v|
+        if v.kind_of?(Hash)
+          if v['name'].include?(params[:name])
+            query_name = v
+            break
+          end
+        end
+      end
+      return query_name
+    end
+
   end
 end
