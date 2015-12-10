@@ -1,5 +1,7 @@
 # coding: utf-8
 require 'yaml'
+require 'json'
+require 'fileutils'
 require_relative 'lib/michieki'
 
 # task for generate road station info list
@@ -17,4 +19,28 @@ task :genlist do
   end
   gen.write_json("data/station_list.json")
   puts "=========> success generate road station list"
+end
+
+# task for generate info
+task :geninfo do
+  puts "=========> start geninfo task..."
+  conf = YAML.load_file('config/config.yml')
+  info = conf["info"]
+
+  open("data/info.json", "w") do |io|
+    io.write(JSON.pretty_generate(info))
+  end
+  puts "=========> success generate info.json"
+end
+
+# task for remove data files
+task :clean do
+  puts "=========> remove data files..."
+  FileUtils.rm(Dir.glob('data/*.json'))
+  puts "=========> success remove data file"
+end
+
+# task for all.
+task all: [:clean, :geninfo, :genlist] do
+  puts "all generate files."
 end
