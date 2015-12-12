@@ -37,7 +37,7 @@ module MichiEki
         if str.include?("▼")
           @data << area if area != nil
           area = {}
-          area["area"] = str
+          area["area"] = str.delete("▼")
           index = 0
           next
         end

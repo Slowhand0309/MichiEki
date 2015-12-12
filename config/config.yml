@@ -1,8 +1,9 @@
 info:
   version: 0.0.1
   methods:
-    - list
     - ping
+    - info
+    - list
   link: https://github.com/Slowhand0309/MichiEki
 gen_urls:
   - http://www.seaview.jp/rs/101-111.htm
