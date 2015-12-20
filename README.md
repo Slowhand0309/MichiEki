@@ -7,6 +7,14 @@ APIを呼ぶと結果がJSON返ります。
 ## データ提供
 道の駅データは[道の駅一覧表 for GPS](http://www.seaview.jp/rs/index.html)さん より頂きました。ありがとうございます。
 
+## 事前データ作成
+
+`config.yml`を元に`api/info`で取得する情報や道の駅データを作成します。
+
+```
+$ rake all
+```
+
 ## 起動
 
 ```
