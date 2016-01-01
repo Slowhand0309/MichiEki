@@ -6,7 +6,7 @@ require_relative 'lib/michieki'
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
-task :default => :spec
+task :default => :all
 
 # task for generate road station info list
 task :genlist do
