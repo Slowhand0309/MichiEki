@@ -4,6 +4,10 @@ require 'json'
 require 'fileutils'
 require_relative 'lib/michieki'
 
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
+
 # task for generate road station info list
 task :genlist do
   puts "=========> start genlist task..."
@@ -41,6 +45,6 @@ task :clean do
 end
 
 # task for all.
-task all: [:clean, :geninfo, :genlist] do
+task all: [:clean, :geninfo, :genlist, :spec] do
   puts "all generate files."
 end
