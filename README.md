@@ -3,29 +3,34 @@
 [![Build Status](https://travis-ci.org/Slowhand0309/MichiEki.svg?branch=master)](https://travis-ci.org/Slowhand0309/MichiEki)
 
 `MichiEki`は道の駅情報を提供するAPIです。<br>
-APIを呼ぶと結果がJSON返ります。
+APIを呼ぶと結果がJSONで返ります。
 
 
 ## データ提供
 道の駅データは[道の駅一覧表 for GPS](http://www.seaview.jp/rs/index.html)さん より頂きました。ありがとうございます。
 
-## 事前データ作成
+## 事前準備
 
-`config.yml`を元に`api/info`で取得する情報や道の駅データを作成します。
+gemのインストール
 
+```sh
+$ bundle install
 ```
+
+`config.yml`を元に`api/info`で取得する情報や道の駅データを以下で作成します。
+
+```sh
 $ rake all
 ```
 
 ## 起動
 
-```
-$ bundle install
+```sh
 $ rackup
 ```
 
 ※ローカルで動作させる場合
-```
+```sh
 $ rackup -o 0.0.0.0
 ```
 
@@ -36,7 +41,7 @@ $ rackup -o 0.0.0.0
 * **ping**
 
   死活監視用 `echo`にパラメータを設定するとその値がかえる
-```
+```sh
 http://localhost:9292/api/ping # => {"ping":"pong"}
 http://localhost:9292/api/ping?echo=test # => {"ping":"pong+test"}
 ```
@@ -44,7 +49,7 @@ http://localhost:9292/api/ping?echo=test # => {"ping":"pong+test"}
 * **info**
 
   MichiEkiに関する情報を取得
-```
+```sh
 http://localhost:9292/api/info # =>
 {
   "version":"0.0.1",
@@ -64,7 +69,7 @@ http://localhost:9292/api/info # =>
 
   またエリアと名前で絞り込みが可能
 
-```
+```sh
 http://localhost:9292/api/list # =>
 [{"area":"北海道","２３０ルスツ":{"name":"２３０ルスツ",・・・
 
