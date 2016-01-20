@@ -10,8 +10,8 @@ module MichiEki
   # from http://www.seaview.jp/rs/index.html
   class StationListGenerator
 
-     ATTR_LIST = ["name", "lat", "lng", "park", "", "", "", "address"]
-     IGNORE_INDEX = [4, 5, 6]
+     ATTR_LIST = ["name", "lat", "lng", "park", "", "", "", "address"].freeze
+     IGNORE_INDEX = [4, 5, 6].freeze
 
     # initialize
     def initialize()

@@ -17,7 +17,7 @@ task :genlist do
   gen = MichiEki::StationListGenerator.new
 
   url_list.each do |url|
-    puts "get data from >> " + url
+    puts "get data from >> #{url}"
     gen.set_url(url)
     gen.generate
   end

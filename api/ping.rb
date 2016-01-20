@@ -1,5 +1,5 @@
 module MichiEki
-  # check method for alive 
+  # check method for alive
   class Ping < Grape::API
     format :json
 
@@ -9,7 +9,7 @@ module MichiEki
     get '/ping' do
       str = 'pong'
       if params[:echo] != nil
-        str = str + "+" + params[:echo]
+        str = "#{str}+#{params[:echo]}"
       end
       { ping: str }
     end

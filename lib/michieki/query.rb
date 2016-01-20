@@ -5,7 +5,7 @@ module MichiEki
   class Query
 
     # road station infomation data
-    LIST_JSON_FILE = 'data/station_list.json'
+    LIST_JSON_FILE = 'data/station_list.json'.freeze
 
     def initialize
       @data = JSON.load(open(LIST_JSON_FILE, 'r:utf-8').read)

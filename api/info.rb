@@ -7,7 +7,7 @@ module MichiEki
     format :json
 
     # infomation data file
-    INFO_JSON_FILE = 'data/info.json'
+    INFO_JSON_FILE = 'data/info.json'.freeze
 
     # GET road infomation
     get '/info' do
