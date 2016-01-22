@@ -3,6 +3,7 @@ require 'grape'
 require_relative '../api/ping'
 require_relative '../api/info'
 require_relative '../api/list'
+require_relative '../api/search'
 
 module MichiEki
   class API < Grape::API
@@ -11,5 +12,6 @@ module MichiEki
     mount ::MichiEki::Ping
     mount ::MichiEki::Info
     mount ::MichiEki::List
+    mount ::MichiEki::Search
   end
 end

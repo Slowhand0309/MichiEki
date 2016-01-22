@@ -7,7 +7,7 @@ module MichiEki
     format :json
 
     params do
-      optional :area, type: String
+      optional :area, type: String, desc: "Target area"
     end
     # GET road station list
     get '/list' do
