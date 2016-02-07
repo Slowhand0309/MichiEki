@@ -37,6 +37,13 @@ task :geninfo do
   puts "=========> success generate info.json"
 end
 
+task :genlocations do
+  puts "=========> start genlocations task..."
+  generator = MichiEki::LocationsGenerator.new
+  generator.run
+  puts "=========> success generate locations.json"
+end
+
 # task for remove data files
 task :clean do
   puts "=========> remove data files..."
