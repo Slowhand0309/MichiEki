@@ -7,6 +7,8 @@ module MichiEki
 
     CONFIG_YML = 'config/config.yml'.freeze
     ADDRESS_LIST_KEY = 'geo_address'.freeze
+    LAT = 'lat'.freeze
+    LNG = 'lng'.freeze
 
     def initialize
       Geocoder.configure(:language  => :ja, :units => :km)
@@ -18,18 +20,20 @@ module MichiEki
         raise StandardError, "Not found config file."
       end
 
-      adr_list = conf[ADDRESS_LIST_KEY]
-      unless adr_list
+      address_maps = conf[ADDRESS_LIST_KEY]
+      unless address_maps
         raise StandardError, "Not found #{ADDRESS_LIST_KEY} key in config file."
       end
 
-      adr_list.each do |adr|
-        location = Geocoder.search(adr)[0].geometry["location"]
+      geo_map = {}
+      address_maps.each do |k, v|
+        location = Geocoder.search(v)[0].geometry["location"]
         # TODO debug
-        puts "lat : #{location['lat']}"
-        puts "lng : #{location['lng']}"
+        puts "lat : #{location[LAT]}"
+        puts "lng : #{location[LNG]}"
+        geo_map[k] = {LAT => location[LAT], LNG => location[LNG]}
       end
-
+      p geo_map
     end
   end
 end
