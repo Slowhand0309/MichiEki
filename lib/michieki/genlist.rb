@@ -15,7 +15,7 @@ module MichiEki
 
     # initialize
     def initialize()
-      @data = Array.new
+      @data = {}
     end
 
     # setting url
@@ -28,6 +28,7 @@ module MichiEki
       doc = Nokogiri::HTML(html.toutf8, nil, 'utf-8')
 
       area = nil
+      area_name = ""
       station = {}
 
       index = 0
@@ -35,9 +36,9 @@ module MichiEki
         str = node.text
         next if str.length > 100
         if str.include?("▼")
-          @data << area if area != nil
+          @data[area_name] = area if area != nil
           area = {}
-          area["area"] = str.delete("▼")
+          area_name = str.delete("▼")
           index = 0
           next
         end
@@ -56,8 +57,7 @@ module MichiEki
           end
         end
       end
-
-      @data << area if area != nil
+      @data[area_name] = area if area != nil
     end
 
     # write file to json format

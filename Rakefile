@@ -53,6 +53,6 @@ task :clean do
 end
 
 # task for all.
-task all: [:clean, :geninfo, :genlist, :spec] do
+task all: [:clean, :geninfo, :genlist, :genlocations, :spec] do
   puts "all generate files."
 end

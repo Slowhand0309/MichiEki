@@ -28,13 +28,12 @@ module MichiEki
       @geo_map = {}
       address_maps.each do |k, v|
         info = Geocoder.search(v)[0]
-        puts "k:#{k}, v:#{v}"
+        # puts "k:#{k}, v:#{v}"
         next if info == nil
 
         location = info.geometry["location"]
-        # TODO debug
-        puts "lat : #{location[LAT]}"
-        puts "lng : #{location[LNG]}"
+        # puts "lat : #{location[LAT]}"
+        # puts "lng : #{location[LNG]}"
         @geo_map[k] = {LAT => location[LAT], LNG => location[LNG]}
         sleep 1 # avoid 'Google Geocoding API error: over query limit.''
       end
