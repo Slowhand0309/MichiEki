@@ -25,15 +25,26 @@ module MichiEki
         raise StandardError, "Not found #{ADDRESS_LIST_KEY} key in config file."
       end
 
-      geo_map = {}
+      @geo_map = {}
       address_maps.each do |k, v|
-        location = Geocoder.search(v)[0].geometry["location"]
+        info = Geocoder.search(v)[0]
+        puts "k:#{k}, v:#{v}"
+        next if info == nil
+
+        location = info.geometry["location"]
         # TODO debug
         puts "lat : #{location[LAT]}"
         puts "lng : #{location[LNG]}"
-        geo_map[k] = {LAT => location[LAT], LNG => location[LNG]}
+        @geo_map[k] = {LAT => location[LAT], LNG => location[LNG]}
+        sleep 1 # avoid 'Google Geocoding API error: over query limit.''
       end
-      p geo_map
+    end
+
+    # write file to json format
+    def write_json(file)
+      open(file, "w") do |io|
+      	io.write(JSON.pretty_generate(@geo_map))
+      end
     end
   end
 end

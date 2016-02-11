@@ -14,14 +14,14 @@ task :genlist do
   conf = YAML.load_file('config/config.yml')
   url_list = conf["gen_urls"]
 
-  gen = MichiEki::StationListGenerator.new
+  generator = MichiEki::StationListGenerator.new
 
   url_list.each do |url|
     puts "get data from >> #{url}"
-    gen.set_url(url)
-    gen.generate
+    generator.set_url(url)
+    generator.run
   end
-  gen.write_json("data/station_list.json")
+  generator.write_json("data/station_list.json")
   puts "=========> success generate road station list"
 end
 
@@ -41,6 +41,7 @@ task :genlocations do
   puts "=========> start genlocations task..."
   generator = MichiEki::LocationsGenerator.new
   generator.run
+  generator.write_json("data/locations.json")
   puts "=========> success generate locations.json"
 end
 

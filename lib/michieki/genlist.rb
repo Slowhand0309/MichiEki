@@ -23,7 +23,7 @@ module MichiEki
       @url = url
     end
 
-    def generate
+    def run
       html = open(@url).read
       doc = Nokogiri::HTML(html.toutf8, nil, 'utf-8')
 
