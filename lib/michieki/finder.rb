@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'geocoder'
 
 module MichiEki
   class Finder
@@ -13,6 +14,12 @@ module MichiEki
 
     # threshold for find area
     THRESHOLD = 0.05
+
+    # default scope area (km)
+    SCOPE_AREA = 20
+
+    # configuration to japan locate
+    Geocoder.configure(:language  => :ja, :units => :km)
 
     def find(params)
       lat = params[:lat]
@@ -41,11 +48,34 @@ module MichiEki
 
     def get_stations(areas, lat, lng)
       stations = []
+      if areas.size.zero?
+        return stations
+      end
+
+      # to gecoder object
+      from = Geocoder.search("#{lat},#{lng}")
+
       station_list = JSON.load(open(LIST_JSON_FILE, 'r:utf-8').read)
       areas.each do |area|
-        stations << station_list[area] if station_list.include? area
+        list = station_list[area]
+        if list
+          list.each do |k, v|
+            # lat/lng to gecoder object
+            _lat  = format(v['lat'])
+            _lng  = format(v['lng'])
+            puts "#{_lat},#{_lng}" # TODO for debug
+            to = Geocoder.search("#{_lat},#{_lng}")
+            distance = Geocoder::Calculations.distance_between(from, to)
+            stations << v if distance < SCOPE_AREA
+          end
+        end
       end
       stations
+    end
+
+    def format(position)
+      values = position.split('.')
+      "#{values[0]}.#{values[1]}#{values[2]}"
     end
   end
 end
