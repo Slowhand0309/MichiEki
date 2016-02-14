@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "michieki"
 require "spec_helper"
 
