@@ -8,7 +8,8 @@ RSpec.describe MichiEki::Finder do
     finder = MichiEki::Finder.new
     ret = finder.find(params)
 
-    puts ret # TODO for debug
+    expect(ret.size).to eq 1
+    expect(ret[0]['name']).to eq '八王子滝山'
   end
 
 end

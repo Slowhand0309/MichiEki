@@ -13,10 +13,10 @@ module MichiEki
     UNKOWN_AREA = 'unkown'.freeze
 
     # threshold for find area
-    THRESHOLD = 0.05
+    THRESHOLD = 0.1
 
     # default scope area (km)
-    SCOPE_AREA = 20
+    SCOPE_AREA = 100
 
     # configuration to japan locate
     Geocoder.configure(:language  => :ja, :units => :km)
@@ -39,7 +39,7 @@ module MichiEki
         _lat = v['lat']
         _lng = v['lng']
         if (_lat - lat).abs < THRESHOLD && (_lng - lng).abs < THRESHOLD
-          puts "area : #{k}, lat : #{_lat}, lng : #{_lng}" # TODO for debug
+#          puts "area : #{k}, lat : #{_lat}, lng : #{_lng}" # TODO for debug
           areas << k
         end
       end
@@ -52,19 +52,18 @@ module MichiEki
         return stations
       end
 
-      # to gecoder object
-      from = Geocoder.search("#{lat},#{lng}")
+      # to array
+      from = [lat.to_f, lng.to_f]
 
       station_list = JSON.load(open(LIST_JSON_FILE, 'r:utf-8').read)
       areas.each do |area|
         list = station_list[area]
         if list
           list.each do |k, v|
-            # lat/lng to gecoder object
+            # to array
             _lat  = format(v['lat'])
             _lng  = format(v['lng'])
-            puts "#{_lat},#{_lng}" # TODO for debug
-            to = Geocoder.search("#{_lat},#{_lng}")
+            to = [_lat.to_f, _lng.to_f]
             distance = Geocoder::Calculations.distance_between(from, to)
             stations << v if distance < SCOPE_AREA
           end
