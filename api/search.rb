@@ -7,13 +7,14 @@ module MichiEki
     format :json
 
     params do
-      requires :lat, type: String, desc: "latitude"
-      requires :lon, type: String, desc: "longitude"
+      requires :lat, type: Float, desc: "latitude"
+      requires :lng, type: Float, desc: "longitude"
+      optional :scope, type: Integer, desc: "Area search scope"
     end
 
     # Search road station
     get '/search' do
-      # TODO
+      MichiEki::Finder.new.find(params)
     end
   end
 end

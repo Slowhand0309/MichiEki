@@ -29,7 +29,7 @@ module MichiEki
       if lat != nil && lng != nil
         areas = find_areas(lat, lng)
       end
-      get_stations(areas, lat, lng)
+      get_stations(areas, lat, lng, params[:scope])
     end
 
     def find_areas(lat, lng)
@@ -46,7 +46,10 @@ module MichiEki
       areas
     end
 
-    def get_stations(areas, lat, lng)
+    def get_stations(areas, lat, lng, scope)
+
+      scope ||= SCOPE_AREA # set default if null
+
       stations = []
       if areas.size.zero?
         return stations
@@ -65,7 +68,7 @@ module MichiEki
             _lng  = format(v['lng'])
             to = [_lat.to_f, _lng.to_f]
             distance = Geocoder::Calculations.distance_between(from, to)
-            stations << v if distance < SCOPE_AREA
+            stations << v if distance < scope
           end
         end
       end
