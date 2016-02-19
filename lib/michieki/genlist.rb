@@ -36,13 +36,13 @@ module MichiEki
         str = node.text
         next if str.length > 100
         if str.include?("▼")
-          @data[area_name] = area if area != nil
+          @data[area_name] = area if area
           area = {}
           area_name = str.delete("▼")
           index = 0
           next
         end
-        if area != nil && station != nil
+        if area && station
           if IGNORE_INDEX.include?(index)
             index = index + 1
             next
@@ -57,7 +57,7 @@ module MichiEki
           end
         end
       end
-      @data[area_name] = area if area != nil
+      @data[area_name] = area if area
     end
 
     # write file to json format

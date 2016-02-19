@@ -26,7 +26,7 @@ module MichiEki
       lng = params[:lng]
 
       areas = []
-      if lat != nil && lng != nil
+      if lat && lng
         areas = find_areas(lat, lng)
       end
       get_stations(areas, lat, lng, params[:scope])

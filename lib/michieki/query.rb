@@ -16,7 +16,7 @@ module MichiEki
 
       # where area
       query_data = nil
-      if params[:area] != nil
+      if params[:area]
         if @data.include?(params[:area])
           query_data = @data[params[:area]]
           query_data[:area] = params[:area]
@@ -24,15 +24,15 @@ module MichiEki
       end
 
       # where name
-      if params[:name] != nil
-        if query_data != nil
+      if params[:name]
+        if query_data
           # query area & name
           query_data = search_name(query_data, params)
         else
           # query name
           @data.each do |k,v|
             query_name = search_name(v, params)
-            if query_name != nil
+            if query_name
               query_data = query_name
               query_data[:area] = k
               break
@@ -41,7 +41,7 @@ module MichiEki
         end
       end
 
-      if params[:area] != nil || params[:name] != nil
+      if params[:area] || params[:name]
         query_data
       else
         @data
