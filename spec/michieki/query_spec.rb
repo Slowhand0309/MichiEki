@@ -6,25 +6,25 @@ RSpec.describe MichiEki::Query do
 
   it 'empty hash' do
     query = MichiEki::Query.new
-    ret = query.search_name(Hash.new, nil)
+    ret = query.search_data(Hash.new, nil)
     expect(ret).to eq nil
   end
 
   it 'not match' do
-    params = {:name => 'you'}
-    query_data = {:key => {'name' => 'me', :value => 'you'}}
+    name = 'you'
+    query_data = {'me' => {'name' => 'me', :value => 'value'}}
 
     query = MichiEki::Query.new
-    ret = query.search_name(query_data, params)
+    ret = query.search_data(query_data, name)
     expect(ret).to eq nil
   end
 
   it 'match' do
-    params = {:name => 'you'}
-    query_data = {:key => {'name' => 'you', :value => 'me'}}
+    name = 'you'
+    query_data = {'you+me' => {'name' => 'you+me', :value => 'value'}}
 
     query = MichiEki::Query.new
-    ret = query.search_name(query_data, params)
-    expect(ret['name']).to eq 'you'
+    ret = query.search_data(query_data, name)
+    expect(ret['name']).to eq 'you+me'
   end
 end

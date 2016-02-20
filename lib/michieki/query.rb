@@ -17,9 +17,10 @@ module MichiEki
       # where area
       query_data = nil
       if params[:area]
-        if @data.include?(params[:area])
-          query_data = @data[params[:area]]
-          query_data[:area] = params[:area]
+        area = scan(params[:area])
+        if area
+          query_data = @data[area]
+          query_data[:area] = area
         end
       end
 
@@ -27,13 +28,14 @@ module MichiEki
       if params[:name]
         if query_data
           # query area & name
-          query_data = search_name(query_data, params)
+          result = search_data(query_data, params[:name])
+          result[:area] = query_data[:area]
+          query_data = result
         else
           # query name
           @data.each do |k,v|
-            query_name = search_name(v, params)
-            if query_name
-              query_data = query_name
+            query_data = search_data(v, params[:name])
+            if query_data
               query_data[:area] = k
               break
             end
@@ -48,23 +50,26 @@ module MichiEki
       end
     end
 
-    # search equal name
-    def search_name(query_data, params)
+    def scan(area)
+      @areas.find {|v| v.include?(area)}
+    end
 
-      query_name = nil
+    # search equal name
+    def search_data(query_data, name)
+
+      data = nil
       query_data.each do |k, v|
-        if v.kind_of?(Hash)
-          if v['name'].include?(params[:name])
-            query_name = v
-            break
-          end
+        if v['name'].include?(name)
+          data = v
+          break
         end
       end
-      return query_name
+      return data
     end
 
     def load
       @data = JSON.load(open(LIST_JSON_FILE, 'r:utf-8').read)
+      @areas = Set.new(@data.keys)
     end
 
   end

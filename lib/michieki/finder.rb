@@ -13,10 +13,10 @@ module MichiEki
     UNKOWN_AREA = 'unkown'.freeze
 
     # threshold for find area
-    THRESHOLD = 0.1
+    THRESHOLD = 0.5
 
     # default scope area (km)
-    SCOPE_AREA = 100
+    SCOPE_AREA = 30
 
     # configuration to japan locate
     Geocoder.configure(:language  => :ja, :units => :km)
