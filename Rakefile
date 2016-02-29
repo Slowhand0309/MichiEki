@@ -1,8 +1,10 @@
 # coding: utf-8
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'yaml'
 require 'json'
 require 'fileutils'
-require_relative 'lib/michieki'
+require 'lib/michieki'
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)

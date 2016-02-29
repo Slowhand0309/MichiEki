@@ -1,6 +1,6 @@
 # encoding: utf-8
 require 'json'
-require_relative '../lib/michieki'
+require 'lib/michieki'
 
 module MichiEki
   class List < Grape::API

@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'grape'
-require_relative '../api/ping'
-require_relative '../api/info'
-require_relative '../api/list'
-require_relative '../api/search'
+require 'api/ping'
+require 'api/info'
+require 'api/list'
+require 'api/search'
 
 module MichiEki
   class API < Grape::API
