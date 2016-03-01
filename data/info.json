@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "methods": [
+    "ping",
+    "info",
+    "list",
+    "search"
+  ],
+  "link": "https://github.com/Slowhand0309/MichiEki"
+}
