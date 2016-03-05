@@ -1,5 +1,7 @@
 # MichiEki
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 [![Build Status](https://travis-ci.org/Slowhand0309/MichiEki.svg?branch=master)](https://travis-ci.org/Slowhand0309/MichiEki)
 
 `MichiEki`は道の駅情報を提供するAPIです。<br>

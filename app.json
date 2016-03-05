@@ -1,0 +1,8 @@
+{
+  "name": "MichiEki",
+  "description": "API for provides information Road Station",
+  "success_url": "/api/info",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-ruby"
+  }
+}
